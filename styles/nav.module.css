@@ -83,7 +83,7 @@
 
   /* メニュー（オーバーレイ内の配置） */
   .list {
-    display: grid;
+    display: glid;
     gap: 40px;
     place-content: center;
     text-align: center;
