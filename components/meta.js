@@ -15,6 +15,7 @@ const {
 // 汎用OGP画像
 import siteImg from 'images/ogp.jpg'
 
+<<<<<<< HEAD
 const Meta ({
   pageTitle,
   pageDesc,
@@ -22,6 +23,9 @@ const Meta ({
   pageImgW,
   pageImgH
 }) {
+=======
+const Meta = ({ pageTitle, pageDesc, pageImg, pageImgW, pageImgH }) => {
+>>>>>>> chapter6
   // ページのタイトル
   const title = pageTitle ? `${pageTitle} | ${siteTitle}` : siteTitle
 
