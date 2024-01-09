@@ -15,22 +15,28 @@ const {
 // 汎用OGP画像
 import siteImg from 'images/ogp.jpg'
 
-const Meta = ({ pageTitle, pageDesc }) => {
+const Meta ({
+  pageTitle,
+  pageDesc,
+  pageImg,
+  pageImgW,
+  pageImgH
+}) {
   // ページのタイトル
-  const title = pageTitle ? '${pageTitle} | ${siteTitle}' : siteTitle
+  const title = pageTitle ? `${pageTitle} | ${siteTitle}` : siteTitle
 
   // ページの説明
   const desc = pageDesc ?? siteDesc
 
   // ページのURL
   const router = useRouter()
-  const url = '${siteUrl}${router.asPath}'
+  const url = `${siteUrl}${router.asPath}`
 
   // OGP画像
   const img = pageImg || siteImg.src
   const imgW = pageImgW || siteImg.width
   const imgH = pageImgH || siteImg.height
-  const imgUrl = img.startsWith('https') ? img : '${siteUrl}${img}'
+  const imgUrl = img.startsWith('https') ? img : `${siteUrl}${img}`
 
   return (
     <Head>
@@ -41,7 +47,7 @@ const Meta = ({ pageTitle, pageDesc }) => {
       <meta property='og:description' content={desc} />
 
       <link rel='canonical' href={url} />
-      <meta property='og:description' content={url} />
+      <meta property='og:url' content={url} />
 
       <meta property='og:site_name' content={siteTitle} />
       <meta property='og:type' content={siteType} />
@@ -58,4 +64,5 @@ const Meta = ({ pageTitle, pageDesc }) => {
   )
 }
 
-export default Meta
+
+ export default Meta
