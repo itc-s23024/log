@@ -35,9 +35,7 @@ export default function Schedule ({
         </figure>
 
         <TwoColumn>
-          <TwoColumnMain>
-            <PostBody>{content}</PostBody>
-          </TwoColumnMain>
+          <TwoColumnMain></TwoColumnMain>
           <TwoColumnSidebar></TwoColumnSidebar>
         </TwoColumn>
 
