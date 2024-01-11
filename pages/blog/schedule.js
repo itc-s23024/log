@@ -35,13 +35,13 @@ export default function Schedule ({
         </figure>
 
         <TwoColumn>
-          <TwoColumnMain></TwoColumnMain>
+          <TwoColumnMain>
+            <PostBody>
+              <ConvertBody contentHTML={content} />
+            </PostBody>
+          </TwoColumnMain>
           <TwoColumnSidebar></TwoColumnSidebar>
         </TwoColumn>
-
-        <PostBody>
-          <ConvertBody contentHTML={content} />
-        </PostBody>
       </article>
     </Container>
   )
