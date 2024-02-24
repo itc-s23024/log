@@ -6,8 +6,11 @@ import Posts from 'components/posts'
 import Pagination from 'components/pagination'
 import { getPlaiceholder } from 'plaiceholder'
 
-//ローカルの代替アイキャッチ画像
+// ローカルの代替アイキャッチ画像
 import { eyecatchLocal } from 'lib/constants'
+
+// plaiceholder3 対応用
+import { getImageBuffer } from 'lib/getImageBuffer'
 
 const Home = ({ posts }) => {
   return (
@@ -21,22 +24,24 @@ const Home = ({ posts }) => {
   )
 }
 
-export async function getStaticProps () {
+const getStaticProps = async () => {
   const posts = await getAllPosts(4)
 
   for (const post of posts) {
-    if (!post.hasOwnProperty('eyecatch')) {
+    if (!Object.prototype.hasOwnProperty.call(post, 'eyecatch')) {
       post.eyecatch = eyecatchLocal
     }
-    const { base64 } = await getPlaiceholder(post.eyecatch.url)
+    const imageBuffer = await getImageBuffer(post.eyecatch.url)
+    const { base64 } = await getPlaiceholder(imageBuffer)
     post.eyecatch.blurDataURL = base64
   }
 
   return {
     props: {
-      posts: posts
+      posts
     }
   }
 }
 
 export default Home
+export { getStaticProps }

@@ -5,8 +5,11 @@ import PostHeader from 'components/post-header'
 import Posts from 'components/posts'
 import { getPlaiceholder } from 'plaiceholder'
 
-//ローカルの代替アイキャッチ画像
+// ローカルの代替アイキャッチ画像
 import { eyecatchLocal } from 'lib/constants'
+
+// plaiceholder3用の追加コード
+import { getImageBuffer } from 'lib/getImageBuffer'
 
 const Category = ({ name, posts }) => {
   return (
@@ -18,7 +21,7 @@ const Category = ({ name, posts }) => {
   )
 }
 
-export async function getStaticPaths () {
+const getStaticPaths = async () => {
   const allCats = await getAllCategories()
   return {
     paths: allCats.map(({ slug }) => `/blog/category/${slug}`),
@@ -26,7 +29,7 @@ export async function getStaticPaths () {
   }
 }
 
-export async function getStaticProps (context) {
+const getStaticProps = async context => {
   const catSlug = context.params.slug
 
   const allCats = await getAllCategories()
@@ -35,19 +38,21 @@ export async function getStaticProps (context) {
   const posts = await getAllPostsByCategory(cat.id)
 
   for (const post of posts) {
-    if (!post.hasOwnProperty('eyecatch')) {
+    if (!Object.prototype.hasOwnProperty.call(post, 'eyecatch')) {
       post.eyecatch = eyecatchLocal
     }
-    const { base64 } = await getPlaiceholder(post.eyecatch.url)
+    const imageBuffer = await getImageBuffer(post.eyecatch.url)
+    const { base64 } = await getPlaiceholder(imageBuffer)
     post.eyecatch.blurDataURL = base64
   }
 
   return {
     props: {
       name: cat.name,
-      posts: posts
+      posts
     }
   }
 }
 
 export default Category
+export { getStaticPaths, getStaticProps }
