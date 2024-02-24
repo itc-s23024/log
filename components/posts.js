@@ -14,7 +14,7 @@ const Posts = ({ posts }) => {
                 alt=''
                 layout='fill'
                 objectFit='cover'
-                sizes='(min-width: 1152px) 576px, 50vw'
+                sizes='(min-width:1152px) 576px, 50vw'
                 placeholder='blur'
                 blurDataURL={eyecatch.blurDataURL}
               />
@@ -26,5 +26,4 @@ const Posts = ({ posts }) => {
     </div>
   )
 }
-
 export default Posts
